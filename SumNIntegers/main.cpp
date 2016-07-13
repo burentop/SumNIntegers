@@ -22,10 +22,16 @@ int main()
         to_sum.push_back(to_load);
     }
     
-    cout << "The sum of the first " << n << " numbers ( ";
-    for (int i = 0; i < n; ++i) {
-        cout << to_sum[i] << " ";
-        summed += to_sum[i];
+    if (n < to_sum.size()) {
+        cout << "The sum of the first " << n << " numbers ( ";
+        for (int i = 0; i < n; ++i) {
+            cout << to_sum[i] << " ";
+            summed += to_sum[i];
+        }
+        cout << ") is " << summed << ".\n";
+    } else {
+        cout << "You didn't enter at least " << n << " numbers.\n";
     }
-    cout << ") is " << summed << ".\n";
+    
+    
 }
