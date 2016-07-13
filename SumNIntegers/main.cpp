@@ -10,11 +10,10 @@
 
 int main()
 {
-    vector<int> to_sum;
-    int to_load, n;
-    int summed = 0;
-    constexpr int int_max = 2147483647;
-    bool too_big = false;
+    vector<double> to_sum;
+    vector<double> differences;
+    double to_load, n;
+    double summed = 0;
     
     cout << "Please enter the number of values you want to sum. \n";
     cin >> n;
@@ -24,23 +23,22 @@ int main()
         to_sum.push_back(to_load);
     }
     
-    if (n > to_sum.size() - 1) {
+    if (n < to_sum.size()) {
         cout << "The sum of the first " << n << " numbers ( ";
         for (int i = 0; i < n; ++i) {
             cout << to_sum[i] << " ";
-            if (int_max - summed >= to_sum[i]) {
-                summed += to_sum[i];
-            } else {
-                too_big = true;
-            }
-            
+            summed += to_sum[i];
         }
-        if (too_big) {
-            cout << ") is too large for an int type.\n";
-        } else {
-            cout << ") is " << summed << ".\n";
+        cout << ") is " << summed << ".\n";
+        
+        for (int i = 1; i < to_sum.size(); ++i) {
+            differences.push_back(to_sum[i] - to_sum[i - 1]);
         }
         
+        cout << "Here is a list of the differences between adjacent values you entered.\n";
+        for (int i = 0; i < differences.size(); ++i) {
+            cout << differences[i] << " ";
+        }
     } else {
         cout << "You didn't enter at least " << n << " numbers.\n";
     }
