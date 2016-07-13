@@ -13,6 +13,8 @@ int main()
     vector<int> to_sum;
     int to_load, n;
     int summed = 0;
+    constexpr int int_max = 2147483647;
+    bool too_big = false;
     
     cout << "Please enter the number of values you want to sum. \n";
     cin >> n;
@@ -22,13 +24,23 @@ int main()
         to_sum.push_back(to_load);
     }
     
-    if (n < to_sum.size()) {
+    if (n > to_sum.size() - 1) {
         cout << "The sum of the first " << n << " numbers ( ";
         for (int i = 0; i < n; ++i) {
             cout << to_sum[i] << " ";
-            summed += to_sum[i];
+            if (int_max - summed >= to_sum[i]) {
+                summed += to_sum[i];
+            } else {
+                too_big = true;
+            }
+            
         }
-        cout << ") is " << summed << ".\n";
+        if (too_big) {
+            cout << ") is too large for an int type.\n";
+        } else {
+            cout << ") is " << summed << ".\n";
+        }
+        
     } else {
         cout << "You didn't enter at least " << n << " numbers.\n";
     }
